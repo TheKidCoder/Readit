@@ -1,0 +1,1 @@
+window.Readit = new Backbone.Marionette.Application

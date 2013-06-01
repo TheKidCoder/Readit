@@ -9,3 +9,5 @@ gem "middleman-livereload"
 gem "middleman-deploy"
 
 gem "redcarpet"
+
+gem 'haml_coffee_assets'
