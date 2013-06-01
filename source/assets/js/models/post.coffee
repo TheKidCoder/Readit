@@ -1,5 +1,7 @@
 Readit.module "Models", (Models, Readit, Backbone, Marionette, $, _) ->
   class @Post extends Backbone.Model
+    parse: (resp) ->
+      resp.data
 
   class @Posts extends Backbone.Paginator.requestPager
     model: Models.Post
@@ -12,16 +14,13 @@ Readit.module "Models", (Models, Readit, Backbone, Marionette, $, _) ->
     paginator_core:
       type: 'GET'
       dataType: 'jsonp'
-      url: => "http://reddit.com/#{}.json"
+      url: "http://reddit.com/.json"
 
     server_api:
-      '$filter': ''
-      '$top': -> @perPage
-      '$skip': -> @currentPage * @perPage
-      '$orderby': 'ReleaseYear'
-      '$format': 'json'
-      '$inlinecount': 'allpages'
-      '$callback': 'callback'
+      'jsonp': '?'
+      'limit': -> @perPage
+      'after': -> @lastPost
 
     parse: (resp) ->
-      console.log resp
+      @lastPost = resp.data.after
+      resp.data.children

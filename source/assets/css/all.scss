@@ -2,9 +2,5 @@
 
 @import "settings";
 @import "imports";
-
-
-body {
-  background: $backgroundColor;
-  color: $textColor;
-}
+@import "base";
+@import "layout";
