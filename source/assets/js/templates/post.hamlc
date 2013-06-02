@@ -1,1 +1,2 @@
-%h2=@title
+%a{href: @url, target: '_BLANK'}
+  %h2=@title

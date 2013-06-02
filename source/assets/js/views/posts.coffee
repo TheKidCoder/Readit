@@ -9,6 +9,13 @@ Readit.module "Views", (Views, Readit, Backbone, Marionette, $, _) ->
     itemView: Post
     initialize: ->
       @listenTo Readit.vent, "posts:load_more", @loadMore
+      @listenTo Readit.vent, "posts:change_subreddit", @changeSubReddit
 
     loadMore: ->
       @collection.requestNextPage({remove: false})
+
+    changeSubReddit: (sr) ->
+      @collection.subReddit = sr
+      @collection.lastPost = ""
+      @collection.reset()
+      @loadMore()

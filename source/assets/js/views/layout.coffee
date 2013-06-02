@@ -7,4 +7,5 @@ Readit.module "Views", (Views, Readit, Backbone, Marionette, $, _) ->
       loadMoreRegion: '#loadMoreRegion'
 
     onRender: ->
+      @headerRegion.show new Views.Header
       @postsRegion.show new Views.Posts collection: Readit.Posts

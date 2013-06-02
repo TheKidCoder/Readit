@@ -4,6 +4,9 @@ Readit.module "Models", (Models, Readit, Backbone, Marionette, $, _) ->
       resp.data
 
   class @Posts extends Backbone.Paginator.requestPager
+    initialize: (options = {}) ->
+      @subReddit = options.subreddit ? ""
+
     model: Models.Post
     paginator_ui:
       firstPage: 0
@@ -14,7 +17,12 @@ Readit.module "Models", (Models, Readit, Backbone, Marionette, $, _) ->
     paginator_core:
       type: 'GET'
       dataType: 'jsonp'
-      url: "http://reddit.com/.json"
+      url: ->
+        if @subReddit? and @subReddit isnt ''
+          value = "r/#{@subReddit}"
+        else
+          value = ""
+        "http://reddit.com/#{value}.json"
 
     server_api:
       'jsonp': '?'

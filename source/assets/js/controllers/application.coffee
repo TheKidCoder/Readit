@@ -3,8 +3,8 @@ Readit.module "Controllers", (Controllers, Readit, Backbone, Marionette, $, _) -
     Readit.ActiveRouters.App = new @AppRoutes
 
   @AppController =
-    index: (path) ->
-      Readit.Posts = new Readit.Models.Posts
+    index: (subreddit) ->
+      Readit.Posts = new Readit.Models.Posts {subreddit}
       Readit.Posts.fetch().complete(->
         Readit.wrapRegion.show new Readit.Views.Layout
       )
@@ -13,6 +13,6 @@ Readit.module "Controllers", (Controllers, Readit, Backbone, Marionette, $, _) -
     controller: Controllers.AppController
 
     appRoutes:
-      ''  : 'index'
-      '/' : 'index'
+      ''            : 'index'
+      '/:subreddit' : 'index'
 
